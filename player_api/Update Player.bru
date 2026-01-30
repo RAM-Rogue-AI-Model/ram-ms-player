@@ -1,0 +1,22 @@
+meta {
+  name: Update Player
+  type: http
+  seq: 5
+}
+
+put {
+  url: {{baseUrl}}/player/21b21d58-7f68-4413-ada2-deb3b4fa84f8
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "King Elessar",
+    "level": 50
+  }
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:3008
+}

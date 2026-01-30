@@ -1,0 +1,26 @@
+meta {
+  name: Create Player
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/player
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Aragorn",
+    "pv": 100,
+    "attack": 25,
+    "speed": 15,
+    "level": 1,
+    "user_id": "aa1d8988-a320-4273-9566-224855d3e099"
+  }
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:3008
+}

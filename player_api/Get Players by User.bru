@@ -1,0 +1,19 @@
+meta {
+  name: Get Players by User
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/player?user_id=aa1d8988-a320-4273-9566-224855d3e099
+  body: none
+  auth: none
+}
+
+params:query {
+  user_id: aa1d8988-a320-4273-9566-224855d3e099
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:3008
+}

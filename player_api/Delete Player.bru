@@ -1,0 +1,15 @@
+meta {
+  name: Delete Player
+  type: http
+  seq: 6
+}
+
+delete {
+  url: {{baseUrl}}/player/YOUR_PLAYER_ID_HERE
+  body: none
+  auth: none
+}
+
+vars:pre-request {
+  baseUrl: http://localhost:3008
+}
