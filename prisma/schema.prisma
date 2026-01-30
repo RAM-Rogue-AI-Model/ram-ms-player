@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model Player {
+  id String @id @default(uuid())
+  name String
+  pv Int
+  attack Int
+  speed Int
+  level Int
+  user_id String
+}
+

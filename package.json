@@ -2,15 +2,17 @@
   "name": "ram-ms-player",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsx app.ts",
+    "dev": "tsx src/app.ts",
     "build": "tsc",
-    "start": "node dist/app.js",
+    "start": "node dist/app.ts",
     "lint": "eslint .",
     "format": "prettier --write .",
-    "fixer": "pnpm format && pnpm lint --fix"
+    "fixer": "pnpm format && pnpm lint --fix",
+    "prisma:generate": "prisma generate",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
@@ -18,6 +20,7 @@
   "packageManager": "pnpm@10.13.1",
   "devDependencies": {
     "@eslint/js": "^9.39.2",
+    "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "@types/node": "^25.0.10",
     "eslint": "^9.39.2",
@@ -29,7 +32,11 @@
     "typescript-eslint": "^8.54.0"
   },
   "dependencies": {
+    "@prisma/adapter-mariadb": "^7.3.0",
+    "@prisma/client": "^7.3.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "prisma": "^7.3.0"
   }
 }
