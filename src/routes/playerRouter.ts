@@ -1,6 +1,7 @@
 import express, { Router } from 'express';
 
 import { PlayerController } from '../controllers/playerController';
+import { authenticate } from '../utils/auth';
 
 class PlayerRouter {
   public router: Router;
@@ -10,22 +11,22 @@ class PlayerRouter {
 
     this.router
       .route('/')
-      .post(async (req, res) => {
+      .post(authenticate, async (req, res) => {
         await playerController.create(req, res);
       })
-      .get(async (req, res) => {
+      .get(authenticate, async (req, res) => {
         await playerController.getAll(req, res);
       });
 
     this.router
       .route('/:id')
-      .get(async (req, res) => {
+      .get(authenticate, async (req, res) => {
         await playerController.getById(req, res);
       })
-      .put(async (req, res) => {
+      .put(authenticate, async (req, res) => {
         await playerController.update(req, res);
       })
-      .delete(async (req, res) => {
+      .delete(authenticate, async (req, res) => {
         await playerController.delete(req, res);
       });
   }
