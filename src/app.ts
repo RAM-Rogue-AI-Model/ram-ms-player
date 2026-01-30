@@ -1,7 +1,7 @@
-import 'dotenv/config';
-
+import cors from 'cors';
 import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
+import 'dotenv/config';
 
 import { PlayerController } from './controllers/playerController';
 import { PlayerRouter } from './routes/playerRouter';
@@ -12,6 +12,13 @@ import { PlayerService } from './services/playerService';
 
   const app = express();
   const port = process.env.PORT ?? 3008;
+
+  app.use(
+    cors({
+      origin: [process.env.CLIENT_URL ?? 'http://localhost:3000'],
+      credentials: true,
+    })
+  );
 
   app.use(express.json());
 
