@@ -6,9 +6,9 @@ const config: configType = {
   DATABASE_HOST: process.env.DATABASE_HOST ?? 'localhost',
   DATABASE_USER: process.env.DATABASE_USER ?? 'user',
   DATABASE_PASSWORD: process.env.DATABASE_PASSWORD ?? '',
-  DATABASE_PORT: Number(process.env.DATABASE_PORT ?? 3306),
-  DATABASE_DB_NAME: process.env.DATABASE_DB_NAME ?? 'ram-ms-user-db',
-  INTERNAL_SECRET: process.env.INTERNAL_SECRET ?? "",
+  DATABASE_PORT: Number(process.env.DATABASE_PORT ?? 3308),
+  DATABASE_DB_NAME: process.env.DATABASE_DB_NAME ?? 'ram-ms-player-db',
+  INTERNAL_SECRET: process.env.INTERNAL_SECRET ?? '',
 };
 
 export { config };
