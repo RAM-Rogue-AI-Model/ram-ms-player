@@ -1,30 +1,32 @@
-import amqp, { Channel, Connection } from 'amqplib';
+import amqp, { Channel, ChannelModel } from 'amqplib';
 
-const RABBITMQ_URL =
-  process.env.RABBITMQ_URL || 'amqp://guest:guest@localhost:5672';
+import { config } from '../utils/config';
 
 const QUEUE = 'create_log_queue';
 
 export class LoggerProducer {
-  private connection?: Connection;
+  private connection?: ChannelModel;
   private channel?: Channel;
 
   async connect() {
     if (this.connection && this.channel) return;
 
-    this.connection = await amqp.connect(RABBITMQ_URL);
+    this.connection = await amqp.connect(config.RABBITMQ_URL);
     this.channel = await this.connection.createChannel();
     await this.channel.assertQueue(QUEUE, { durable: true });
 
+    // eslint-disable-next-line no-console
     console.log('LoggerProducer connecté à RabbitMQ');
   }
 
   async publish(payload: unknown) {
     await this.connect();
+    // eslint-disable-next-line no-console
     console.log('Publication du message de log:', payload);
-    this.channel!.sendToQueue(QUEUE, Buffer.from(JSON.stringify(payload)), {
-      persistent: true,
-    });
+    if (this.channel)
+      this.channel.sendToQueue(QUEUE, Buffer.from(JSON.stringify(payload)), {
+        persistent: true,
+      });
   }
 
   async close() {
