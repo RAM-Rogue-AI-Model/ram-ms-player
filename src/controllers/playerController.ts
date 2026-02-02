@@ -18,7 +18,6 @@ class PlayerController {
         body.pv === undefined ||
         body.attack === undefined ||
         body.speed === undefined ||
-        body.level === undefined ||
         !body.user_id
       ) {
         return res.status(400).json({ error: 'Missing required fields' });

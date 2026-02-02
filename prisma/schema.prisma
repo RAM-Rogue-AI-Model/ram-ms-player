@@ -13,7 +13,6 @@ model Player {
   pv Int
   attack Int
   speed Int
-  level Int
   user_id String
 }
 
