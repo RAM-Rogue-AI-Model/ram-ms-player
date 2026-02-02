@@ -22,7 +22,7 @@ describe('PlayerService', () => {
     pv: 100,
     attack: 10,
     speed: 10,
-    level: 1,
+
     user_id: 'user123',
   };
 
@@ -32,7 +32,7 @@ describe('PlayerService', () => {
       pv: 100,
       attack: 10,
       speed: 10,
-      level: 1,
+
       user_id: 'user123',
     };
 
