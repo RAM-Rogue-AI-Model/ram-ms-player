@@ -15,7 +15,11 @@ class PlayerService {
 
   async list(user_id?: string) {
     if (user_id) {
+<<<<<<< HEAD
       const result = await prisma.player.findMany({
+=======
+      const result = prisma.player.findMany({
+>>>>>>> c103b3f (pending merge)
         where: {
           user_id: user_id,
         },
@@ -28,13 +32,21 @@ class PlayerService {
       );
       return result;
     }
+<<<<<<< HEAD
     const result = await prisma.player.findMany();
+=======
+    const result = prisma.player.findMany();
+>>>>>>> c103b3f (pending merge)
     sendLog('PLAYER', 'OTHER', 'INFO', `Liste de tous les players récupérée`);
     return result;
   }
 
   async getById(id: string) {
+<<<<<<< HEAD
     const result = await prisma.player.findUnique({
+=======
+    const result = prisma.player.findUnique({
+>>>>>>> c103b3f (pending merge)
       where: {
         id: id,
       },
@@ -49,6 +61,7 @@ class PlayerService {
   }
 
   async update(id: string, data: Partial<CreatePlayerInput>) {
+<<<<<<< HEAD
     const existingPlayer = await this.getById(id);
     if (!existingPlayer) {
       sendLog(
@@ -60,6 +73,9 @@ class PlayerService {
       return null;
     }
     const result = await prisma.player.update({
+=======
+    const result = prisma.player.update({
+>>>>>>> c103b3f (pending merge)
       where: {
         id: id,
       },
@@ -79,6 +95,7 @@ class PlayerService {
   }
 
   async delete(id: string) {
+<<<<<<< HEAD
     const existingPlayer = await this.getById(id);
     if (!existingPlayer) {
       sendLog(
@@ -90,6 +107,9 @@ class PlayerService {
       return null;
     }
     const result = await prisma.player.delete({
+=======
+    const result = prisma.player.delete({
+>>>>>>> c103b3f (pending merge)
       where: {
         id: id,
       },
