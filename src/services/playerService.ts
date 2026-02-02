@@ -9,14 +9,13 @@ class PlayerService {
       void sendLog('PLAYER', 'INSERT', 'INFO', `Player ${result.id} créé`);
       return result;
     } catch (err) {
-      console.error(err);
       void sendLog(
         'PLAYER',
         'INSERT',
         'ERROR',
         `Échec de la création du player`
       );
-      return null;
+      throw new Error('Création du player échouée' + (err as Error).message);
     }
   }
 
@@ -45,12 +44,14 @@ class PlayerService {
       );
       return result;
     } catch (err) {
-      console.error(err);
       void sendLog(
         'PLAYER',
         'OTHER',
         'ERROR',
         `Échec de la récupération des players`
+      );
+      throw new Error(
+        'Récupération des players échouée' + (err as Error).message
       );
     }
   }
@@ -65,14 +66,15 @@ class PlayerService {
       void sendLog('PLAYER', 'OTHER', 'INFO', `Player ${id} récupéré`);
       return result;
     } catch (err) {
-      console.error(err);
       void sendLog(
         'PLAYER',
         'OTHER',
         'ERROR',
         `Échec de la récupération du player`
       );
-      return;
+      throw new Error(
+        'Récupération du player échouée' + (err as Error).message
+      );
     }
   }
 
@@ -86,7 +88,7 @@ class PlayerService {
           'WARN',
           `Impossible de mettre à jour, player ${id} non trouvé`
         );
-        return null;
+        throw new Error('Player non trouvé');
       }
       const result = await prisma.player.update({
         where: {
@@ -97,14 +99,13 @@ class PlayerService {
       void sendLog('PLAYER', 'UPDATE', 'INFO', `Player ${id} mis à jour`);
       return result;
     } catch (err) {
-      console.error(err);
       void sendLog(
         'PLAYER',
         'UPDATE',
         'ERROR',
         `Échec de la mise à jour du player ${id}`
       );
-      return null;
+      throw new Error('Mise à jour du player échouée' + (err as Error).message);
     }
   }
 
@@ -118,7 +119,7 @@ class PlayerService {
           'WARN',
           `Impossible de supprimer, player ${id} non trouvé`
         );
-        return null;
+        throw new Error('Player non trouvé');
       }
       const result = await prisma.player.delete({
         where: {
@@ -127,14 +128,13 @@ class PlayerService {
       });
       return result;
     } catch (err) {
-      console.error(err);
       void sendLog(
         'PLAYER',
         'REMOVE',
         'ERROR',
         `Échec de la suppression du player ${id}`
       );
-      return null;
+      throw new Error('Suppression du player échouée' + (err as Error).message);
     }
   }
 }
