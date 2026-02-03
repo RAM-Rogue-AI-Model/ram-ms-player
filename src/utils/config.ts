@@ -14,7 +14,8 @@ const config: configType = {
   DATABASE_DB_NAME: process.env.DATABASE_DB_NAME ?? 'ram-ms-player-db',
   INTERNAL_SECRET: process.env.INTERNAL_SECRET ?? '',
   API_GATEWAY_URL: process.env.API_GATEWAY_URL ?? 'http://localhost:3001',
-  RABBITMQ_URL: process.env.RABBITMQ_URL ?? 'amqp://guest:guest@localhost:5672',
+  RABBITMQ_URL:
+    process.env.RABBITMQ_URL ?? 'amqp://guest:guest@rabbitmq_test:5672',
 };
 
 export { config };
