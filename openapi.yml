@@ -1,0 +1,190 @@
+openapi: 3.0.3
+info:
+  title: API Joueur (Player)
+  description: API RAM - player microservice
+  version: 1.0.0
+servers:
+  - url: http://localhost:{{port}}
+    description: Serveur local
+paths:
+  /player:
+    post:
+      summary: Créer un joueur
+      description: Crée un nouveau joueur.
+      tags: [Joueur]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlayerInput'
+      responses:
+        '201':
+          description: Joueur créé avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '400':
+          description: Champs requis manquants ou erreur de validation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    get:
+      summary: Lister les joueurs
+      description: Retourne la liste de tous les joueurs, filtrable par user_id.
+      tags: [Joueur]
+      parameters:
+        - in: query
+          name: user_id
+          schema:
+            type: string
+          required: false
+          description: ID de l'utilisateur pour filtrer les joueurs
+      responses:
+        '200':
+          description: Liste des joueurs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Player'
+  /player/{id}:
+    get:
+      summary: Obtenir un joueur par ID
+      description: Retourne un joueur selon son ID.
+      tags: [Joueur]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID du joueur
+      responses:
+        '200':
+          description: Joueur trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          description: Joueur non trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    put:
+      summary: Mettre à jour un joueur
+      description: Met à jour les informations d'un joueur existant.
+      tags: [Joueur]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID du joueur
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePlayerInput'
+      responses:
+        '200':
+          description: Joueur mis à jour
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Player'
+        '404':
+          description: Joueur non trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      summary: Supprimer un joueur
+      description: Supprime un joueur existant.
+      tags: [Joueur]
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: string
+          description: ID du joueur
+      responses:
+        '204':
+          description: Joueur supprimé avec succès (pas de contenu)
+        '404':
+          description: Joueur non trouvé
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Identifiant unique du joueur
+        name:
+          type: string
+          description: Nom du joueur
+        pv:
+          type: integer
+          description: Points de vie
+        attack:
+          type: integer
+          description: Attaque
+        speed:
+          type: integer
+          description: Vitesse
+        user_id:
+          type: string
+          description: Identifiant de l'utilisateur propriétaire
+      required:
+        - id
+        - name
+        - pv
+        - attack
+        - speed
+        - user_id
+    CreatePlayerInput:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Nom du joueur
+        pv:
+          type: integer
+          description: Points de vie
+        attack:
+          type: integer
+          description: Attaque
+        speed:
+          type: integer
+          description: Vitesse
+        user_id:
+          type: string
+          description: Identifiant de l'utilisateur propriétaire
+      required:
+        - name
+        - pv
+        - attack
+        - speed
+        - user_id
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Message d'erreur
+      required:
+        - error
